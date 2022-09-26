@@ -75,7 +75,9 @@ defmodule MyLiveWeb.Router do
   scope "/", MyLiveWeb do
     pipe_through [:browser, :require_authenticated_user]
 
-    live "/guess", GameLive
+    live_session :default, on_mount: MyLiveWeb.UserAuthLive do
+      live "/guess", GameLive
+    end
 
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update

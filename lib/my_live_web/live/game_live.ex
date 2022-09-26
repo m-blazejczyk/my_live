@@ -1,13 +1,9 @@
 defmodule MyLiveWeb.GameLive do
   use Phoenix.LiveView, layout: {MyLiveWeb.LayoutView, "live.html"}
 
-  alias MyLive.Accounts
-
   def mount(_params, session, socket) do
-    user = Accounts.get_user_by_session_token(session["user_token"])
     state = new_game_state()
     |> Map.put(:session_id, session["live_socket_id"])
-    |> Map.put(:current_user, user)
     {:ok, assign(socket, state)}
   end
 
